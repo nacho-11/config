@@ -1,0 +1,17 @@
+function rZsh() {
+	source ~/.zshrc
+}
+
+function cdp() {
+	cd ~/Documents/Projects
+}
+
+function c() {
+	clear
+}
+
+function folder() {
+	nautilus . 2&>/dev/null &
+	disown
+}
+
