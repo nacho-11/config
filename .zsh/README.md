@@ -56,6 +56,6 @@ $ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:
 
 ```bash
 $ rm ~/.zshrc ~/.p10k.zsh
-$ ln -s .personal_config/.zsh/.vimrc ~/.vimrc
+$ ln -s .personal_config/.zsh/.zshrc ~/.zshrc
 $ ln -s .personal_config/.zsh/.p10k.zsh ~/.p10k.zsh
 ```
