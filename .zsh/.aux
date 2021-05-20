@@ -1,17 +1,34 @@
-function rZsh() {
+### Aux Functions ###
+
+function rZsh { 
 	source ~/.zshrc
 }
 
-function cdp() {
-	cd ~/Documents/Projects
+function cdp {
+	cd $MAIN_FOLDER/Projects
 }
 
-function c() {
+function cdu {
+	cd $MAIN_FOLDER/University
+}
+
+function c {
 	clear
 }
 
-function folder() {
+function folder {
 	nautilus . 2&>/dev/null &
 	disown
 }
 
+function config {
+	cd $CONFIG
+	code .
+}
+
+#@rZsh      reset zsh
+#@cdp       move to projects folder
+#@cdu       move to university folder
+#@c         clear the console
+#@folder    open nautilus in current directory
+#@config    open and move config folder
