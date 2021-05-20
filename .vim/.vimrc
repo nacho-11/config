@@ -10,7 +10,7 @@ set showmatch
 set sw=2
 set relativenumber
 set laststatus=2
-"set noshowmode
+set noshowmode
 set cursorline
 
 so ~/.personal_config/.vim/plugins.vim
