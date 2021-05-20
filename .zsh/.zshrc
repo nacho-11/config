@@ -117,8 +117,29 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
 # Java
-export PATH=~/.local/opt/jdk-11.0.9.1+1/bin:$PATH
+export PATH=/opt/jdk-11.0.11+9/bin:$PATH
 
 # Android studio
 export ANDROID_HOME=$HOME/Android/Sdk
@@ -128,10 +149,10 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # VirtualEnvWrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
+# export WORKON_HOME=$HOME/.virtualenvs
+# export PROJECT_HOME=$HOME/Devel
+# export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+# source /usr/local/bin/virtualenvwrapper.sh
 
 # Alias
 alias code=codium
@@ -142,26 +163,41 @@ alias n=nvim
 (( ! ${+functions[p10k]} )) || p10k finalize
 
 
-##### Colours ######
+##### Config #####
 
-if [ -f ~/.personal_config/.zsh/.colours ]; then
-    source ~/.personal_config/.zsh/.colours
+MAIN_FOLDER="/home/nacho/Documentos"
+CONFIG="/home/nacho/.personal_config"
+
+##### Colours #####
+
+if [ -f $CONFIG/.zsh/.colours ]; then
+    source $CONFIG/.zsh/.colours
 else
-    print "404: ~/.personal_config/.zsh/.colours not found."
+    print "404: $CONFIG/.zsh/.colours not found."
 fi
-
 
 ##### Functions #####
 
-
-if [ -f ~/.personal_config/.zsh/.aux  ]; then
-    source ~/.personal_config/.zsh/.aux
+if [ -f $CONFIG/.zsh/.aux  ]; then
+    source $CONFIG/.zsh/.aux
 else
-  print "404: ~/.personal_config/.zsh/.aux not found."
+  print "404: $CONFIG/.zsh/.aux not found."
 fi
 
-if [ -f ~/.personal_config/.zsh/.hacking ]; then
-    source ~/.personal_config/.zsh/.hacking
+if [ -f $CONFIG/.zsh/.hacking ]; then
+    source $CONFIG/.zsh/.hacking
 else
-    print "404: ~/.personal_config/.zsh/.hacking not found."
+    print "404: $CONFIG/.zsh/.hacking not found."
+fi
+
+if [ -f $CONFIG/.zsh/.systemctl ]; then
+    source $CONFIG/.zsh/.systemctl
+else
+    print "404: $CONFIG/.zsh/.systemctl not found."
+fi
+
+if [ -f $CONFIG/.zsh/.help ]; then
+    source $CONFIG/.zsh/.help
+else
+    print "404: $CONFIG/.zsh/.help not found."
 fi
