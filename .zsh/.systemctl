@@ -1,0 +1,51 @@
+function psqlStart {
+	sudo systemctl start postgresql.service
+}
+
+function psqlStop {
+	sudo systemctl stop postgresql.service
+}
+
+function psqlStatus {
+	sudo systemctl status postgresql.service
+}
+
+function psqlEnable {
+	sudo systemctl enable postgresql.service
+}
+
+function psqlDisable {
+	sudo systemctl disable postgresql.service
+}
+
+function dockerStart {
+	sudo systemctl start docker
+}
+
+function dockerStop {
+	sudo systemctl stop docker.socket
+	sudo systemctl stop docker.service
+}
+
+function dockerStatus {
+	sudo systemctl status docker
+}
+
+function dockerEnable {
+	sudo systemctl enable docker
+}
+
+function dockerDisable {
+	sudo systemctl disable docker
+}
+
+#@psqlStart       Start postgresql service
+#@psqlStop        Stop postgresql service
+#@psqlStatus      Status postgresql service
+#@psqlEnable      Enable postgresql service
+#@psqlDisable     Disable postgresql service
+#@dockerStart     Start docker service
+#@dockerStop      Stop docker service
+#@dockerStatus    Status docker service
+#@dockerEnable    Enable docker service
+#@dockerDisable   Disable
