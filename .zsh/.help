@@ -1,0 +1,14 @@
+function help {
+  echo -e "List  of commands\n"
+
+  if [ -f $CONFIG/.zsh/.aux ]; then
+    echo -e "${yellowColour}[*] aux${endColour}"
+    cat $CONFIG/.zsh/.aux | grep -oE '#@.+' | awk '{print "    "$2}' FS='#@'
+  fi
+
+  if [ -f $CONFIG/.zsh/.systemctl ]; then
+    echo -e "${yellowColour}[*] systemctl${endColour}"
+    cat $CONFIG/.zsh/.systemctl | grep -oE '#@.+' | awk '{print "    "$2}' FS='#@'
+  fi
+
+}
